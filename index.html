@@ -73,73 +73,26 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-white">
+<body class="bg-slate-950 text-white transition-colors duration-300">
     <div id="root"></div>
 
     <script type="text/babel" data-type="module">
         import React, { useState, useEffect } from 'react';
         import { createRoot } from 'react-dom/client';
         import { 
-            Cpu, 
-            Users, 
-            Briefcase, 
-            TrendingUp, 
-            CheckCircle,
-            BookOpen, 
-            BrainCircuit, 
-            Target, 
-            Share2, 
-            Award, 
-            Menu, 
-            X, 
-            Globe,
-            ArrowRight, 
-            GraduationCap, 
-            Sparkles, 
-            Youtube, 
-            ExternalLink, 
-            Lightbulb, 
-            Network, 
-            Layers, 
-            Smartphone, 
-            Tv, 
-            Wifi, 
-            BarChart2, 
-            Zap, 
-            Box, 
-            FileText, 
-            DollarSign, 
-            Book, 
-            RotateCcw, 
-            ShieldCheck, 
-            Factory, 
-            ChevronDown, 
-            ChevronUp, 
-            Wrench, 
-            MessageSquare,
-            Loader2,
-            MessageCircle,
-            HelpCircle,
-            RefreshCw,
-            Sun,
-            Moon
+            Cpu, Users, Briefcase, TrendingUp, CheckCircle, BookOpen, BrainCircuit, Target, Share2, Award, 
+            Menu, X, Globe, ArrowRight, GraduationCap, Sparkles, Youtube, ExternalLink, Lightbulb, Network, 
+            Layers, Smartphone, Tv, Wifi, BarChart2, Zap, Box, FileText, DollarSign, Book, RotateCcw, 
+            ShieldCheck, Factory, ChevronDown, ChevronUp, Wrench, MessageSquare, Loader2, MessageCircle, 
+            HelpCircle, RefreshCw, Sun, Moon
         } from 'lucide-react';
         import { initializeApp } from "firebase/app";
         import { 
-            getFirestore, 
-            collection, 
-            addDoc, 
-            onSnapshot, 
-            query, 
-            orderBy, 
-            serverTimestamp, 
-            doc, 
-            updateDoc, 
-            arrayUnion 
+            getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, arrayUnion 
         } from "firebase/firestore";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 
-        // --- Mock Config for Standalone HTML (Replace with real values to work) ---
+        // --- Mock Config for Standalone HTML ---
         const __firebase_config = typeof window.__firebase_config !== 'undefined' 
             ? window.__firebase_config 
             : JSON.stringify({ apiKey: "YOUR_API_KEY", authDomain: "project-id.firebaseapp.com", projectId: "project-id", storageBucket: "project-id.firebasestorage.app", messagingSenderId: "sender-id", appId: "app-id" });
@@ -149,7 +102,6 @@
         // --- Firebase Configuration & Initialization ---
         const firebaseConfig = JSON.parse(__firebase_config);
         
-        // Initialize Firebase only if config is valid (prevent crash on dummy data)
         let app, auth, db;
         try {
             app = initializeApp(firebaseConfig);
@@ -162,7 +114,6 @@
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         // --- Gemini API Helper ---
-        // 請在此填入您的 Gemini API Key
         const apiKey = ""; 
 
         const callGemini = async (prompt) => {
@@ -438,7 +389,7 @@
             terms: [
                 { term: 'Project Design-in', def: '客戶在開發階段評估並整合聯發科晶片，早於量產。' },
                 { term: 'Project Design-win', def: '客戶正式選用該解決方案進行量產。' },
-                { term: 'Roadmap', def: '產品規格、效能目標、時程與市場定位的長期規劃。' },
+                { term: 'Roadmap', def: 'Long-term planning of specs, performance, timelines, and positioning.' },
                 { term: 'NTN / NPU / zRAM / SLC', def: '關鍵的晶片組相關技術 (非地面網路、神經處理單元等)。' }
             ],
             ai: {
@@ -467,7 +418,7 @@
             ],
             matrixTitle: '競爭者策略定位矩陣 (Competitor Strategic Positioning Matrix)',
             matrixX: '資源相似性',
-            matrixY: ['市', '場', '共', '同', '性'], // Array for vertical rendering
+            matrixY: ['市', '場', '共', '同', '性'], 
             competitorsList: [
                 {
                 id: 'qualcomm',
@@ -519,7 +470,7 @@
                 {
                 id: 'SUPPLIER',
                 category: '供應商 (SUPPLIER)',
-                icon: 'Box', // Changed from JSX to string
+                icon: 'Box', 
                 color: 'border-blue-500 bg-blue-500/10',
                 partners: [
                     { name: 'IP 供應商 (IP Providers)', details: 'Arm Holdings: 提供 CPU/GPU 架構授權，為行動晶片核心組件。' },
@@ -531,7 +482,7 @@
                 {
                 id: 'CUSTOMER',
                 category: '客戶 (CUSTOMER)',
-                icon: 'Users', // Changed from JSX to string
+                icon: 'Users', 
                 color: 'border-green-500 bg-green-500/10',
                 partners: [
                     { name: '智慧手機品牌 (Smartphone OEMs)', details: 'OPPO, Vivo, Xiaomi, Realme, Huawei (5G 市佔率達 30%)。' }
@@ -541,7 +492,7 @@
                 {
                 id: 'COMPETITOR',
                 category: '競爭者 (COMPETITOR)',
-                icon: 'ShieldCheck', // Changed from JSX to string
+                icon: 'ShieldCheck', 
                 color: 'border-red-500 bg-red-500/10',
                 partners: [
                     { name: 'Qualcomm (高通)', details: '最大競爭對手。Snapdragon 在旗艦與 AI 領域強勢，但在中階市場面臨 MediaTek 價格壓力。' },
@@ -552,7 +503,7 @@
                 {
                 id: 'COMPLEMENTOR',
                 category: '互補者 (COMPLEMENTOR)',
-                icon: 'Factory', // Changed from JSX to string
+                icon: 'Factory', 
                 color: 'border-purple-500 bg-purple-500/10',
                 partners: [
                     { name: 'TSMC (台積電)', details: 'Core partner. Provides 3nm N3P 製程與 CoWoS 封裝。使設計轉化為實體高效能晶片。' },
@@ -856,431 +807,435 @@
             ]
             },
             company: {
-            title: 'Company Introduction — MediaTek',
-            heroHeadline: 'Leading the world with advanced smartphone chip technologies.',
-            heroSub: 'MediaTek stands at the forefront of mobile chip innovation, continuously redefining performance and efficiency standards.',
-            overviewTitle: 'Company Overview',
-            overviewText: 'MediaTek is one of the world’s leading providers of wireless communication and smart device chip solutions, with a strong presence in the smartphone market. Through highly integrated SoC designs, the company supports diverse global brands and market needs.',
-            coreValues: [
-                { title: 'Innovation', desc: 'Continuously invest in advanced manufacturing processes, AI, and mobile communication technologies to drive the long-term evolution of chip performance, focusing on future application scenarios rather than a single product generation.' },
-                { title: 'Co-opetitive', desc: 'Balance standard-setting, supply chain coordination, and market expansion by integrating the dynamic relationship between competition and cooperation within the highly competitive semiconductor industry.' },
-                { title: 'Value-Net', desc: 'Value strategic positioning within a value net that includes foundries, end brands, and distribution channels; align supplier capabilities with customer demands to optimize cost and time-to-market.' }
-            ],
-            buTitle: 'Business Units & Strategic Focus',
-            buOverview: 'MediaTek operates a globally scaled and diversified chip portfolio spanning mobile communications, smart devices, and connectivity technologies, enabling strategic flexibility.',
-            buSmartphoneTitle: 'Smartphone BU (Business Unit)',
-            buSmartphoneDesc: 'Serving as the company\'s core competitive engine, it drives technical cadence and economies of scale. With the Dimensity series at its core, it provides comprehensive coverage of the smartphone market, ranging from flagship to mainstream segments.',
-            otherBusTitle: 'Other Business Units',
-            otherBus: [
-                { name: 'Smart Home & TV', desc: 'Chip solutions for smart TVs and home entertainment systems' },
-                { name: 'Internet of Things (IoT)', desc: 'Industrial and consumer applications, strengthening edge computing' },
-                { name: 'Connectivity', desc: 'Wi-Fi and Bluetooth technologies expanding cross-device value' }
-            ],
-            cta: 'Explore MediaTek’s smartphone chip technologies and discover how they shape the future of mobile devices.',
-            links: {
-                web: 'Official Website',
-                stock: 'Stock Info (2454.TW)'
-            }
-            },
-            job: {
-            title: 'Job Description',
-            subtitle: 'Join the top team, define future communication',
-            position: 'Product Marketing Manager (PMM) – Smartphone',
-            location: 'Hsinchu, Taiwan | Full-time',
-            apply: 'Apply Now',
-            jobOverviewTitle: 'Job Overview',
-            jobOverview: 'The Smartphone Product Marketing Manager (PMM) is responsible for driving the success of MediaTek’s smartphone SoC product portfolio, including the Dimensity 5G and Helio 4G platforms. This role combines deep technical product understanding, Go-to-Market (GTM) execution, and cross-functional collaboration to empower global Android OEM partners and strengthen MediaTek’s market position.',
-            descTitle: 'Key Responsibilities',
-            descGroups: [
-                {
-                title: 'Product and Technical Ownership',
-                points: [
-                    'Responsible for product planning, marketing promotion, and project design-in of smartphone SoCs.',
-                    'Maintain a deep understanding of Dimensity and Helio platforms, focusing on advantages in AI, imaging, gaming, connectivity, and power efficiency.',
-                    'Support OEM customers in understanding product differentiation and application scenarios across different market segments.'
-                ]
-                },
-                {
-                title: 'Go-to-Market (GTM) Strategy',
-                points: [
-                    'Define and execute product launch strategies, including positioning, pricing, packaging, and channel strategies.',
-                    'Manage end-to-end marketing campaigns and product launch execution across multiple regions.',
-                    'Translate product features into clear customer and business value propositions.'
-                ]
-                },
-                {
-                title: 'Market Intelligence and Competitive Analysis',
-                points: [
-                    'Conduct market analysis covering market size, customer segmentation, and buyer pain points.',
-                    'Develop competitive analysis and positioning to support the development of product and business strategies.'
-                ]
-                },
-                {
-                title: 'Cross-functional Collaboration',
-                points: [
-                    'Work closely with engineering, product development, sales, operations, finance, and legal teams.',
-                    'Manage customer relationships and maintain effective communication and collaboration.',
-                    'Provide sales and customer-facing teams with presentations, sales collateral, training, and FAQs.'
-                ]
-                },
-                {
-                title: 'Product Roadmap and Execution',
-                points: [
-                    'Plan and manage the product roadmap and associated marketing and product management activities.',
-                    'Coordinate with cross-functional teams to execute product plans and achieve business and financial goals.'
-                ]
-                }
-            ],
-            compTitle: 'Learning, Development & Benefits',
-            salary: 'Reference range: ≥ TWD 40,000 per month',
-            benefitsList: [
-                {
-                title: 'Learning and Development',
-                items: ['Structured training systems and clear learning roadmaps.', 'Diverse learning resources (On-the-Job Training, external courses).', 'Knowledge sharing and research incentive mechanisms.']
-                },
-                {
-                title: 'Employee Benefits & Wellness',
-                items: ['Physical & Mental Well-being: Fitness facilities and stress-relief services.', 'Enriched Lifestyle: Arts and cultural activities, travel consulting.', 'Community & Relationships: Family support and social welfare initiatives.', 'Personalized Services: Ticket booking services and daily life assistance.']
-                }
-            ],
-            ksaTitle: 'Competency (KSA)',
-            ksa: {
-                knowledge: {
-                    title: 'KNOWLEDGE',
-                    tags: ['Electrical Engineering', 'Computer Science', 'Business'],
-                    points: [
-                        'Educational background in Electrical Engineering, Computer Science, Business, or related fields.',
-                        'In-depth understanding of the smartphone and consumer electronics industries (including 5G/4G SoCs).',
-                        'Familiarity with GTM (Go-to-Market) processes, market analysis, and competitive analysis.'
-                    ]
-                },
-                skill: {
-                    title: 'SKILLS',
-                    tags: ['English Fluency', 'Customer Insight'],
-                    points: [
-                        'Ability to translate complex technologies into clear market messages and value propositions.',
-                        'Strong capabilities in data interpretation, customer insight, and competitive dynamics analysis.',
-                        'Fluent in English communication (listening, speaking, reading, and writing).'
-                    ]
-                },
-                attitude: {
-                    title: 'ATTITUDE',
-                    tags: ['Cross-functional Collaboration', 'Fast-paced & Adaptable'],
-                    points: [
-                        'Self-motivated and result-oriented, with a strong sense of ownership over product and market outcomes.',
-                        'Collaborative spirit with the ability to work effectively with cross-functional and global teams.',
-                        'Highly adaptable and willing to learn in a fast-paced, technology-driven environment.'
-                    ]
-                }
-            },
-            termTitle: 'Terminology Flashcards',
-            terms: [
-                { term: 'Project Design-in', def: 'Customer evaluates and integrates MediaTek’s chipset during development.' },
-                { term: 'Project Design-win', def: 'Customer officially selects the solution for mass production.' },
-                { term: 'Roadmap', def: 'Long-term planning of specs, performance, timelines, and positioning.' },
-                { term: 'NTN / NPU / zRAM / SLC', def: 'Key chipset technologies (Non-Terrestrial Network, Neural Processing Unit, etc.).' }
-            ],
-            ai: {
-                title: '✨ AI Career Coach',
-                desc: 'Click below to let Gemini generate a mock interview question and advice for this role!',
-                btn: 'Generate Interview Question',
-                resultTitle: 'Gemini Advice:'
-            }
-            },
-            market: {
-            title: 'Market Analysis',
-            subtitle: 'A Multidimensional Analysis through the Lens of Market Commonality and Resource Similarity.',
-            resourceTitle: 'Resource Configuration',
-            tangibleTitle: 'Tangible Resources',
-            intangibleTitle: 'Intangible Resources',
-            tangiblePoints: [
-                'SoC Product Portfolio: Dimensity covers 5G segments from entry-level to flagship; Helio targets the 4G market.',
-                'R&D and Design Capabilities: Competitive design expertise in multi-core CPU, GPU, NPU, and integrated Modems.',
-                'Fabless Model: Close collaboration with foundries (such as TSMC).'
-            ],
-            intangiblePoints: [
-                'Brand Advantage: Strong brand equity in the cost-to-performance (value-driven) smartphone market.',
-                'AI & Multimedia IP: Proprietary IPs that enhance camera, gaming, and user experience.',
-                'OEM Partnerships: Extensive global partnerships with Android smartphone brands.',
-                'Ecosystem Adoption: Widespread adoption across global Android device models.'
-            ],
-            matrixTitle: 'Competitor Strategic Positioning Matrix',
-            matrixX: 'Resource Similarity',
-            matrixY: 'Market Commonality', 
-            competitorsList: [
-                {
-                id: 'qualcomm',
-                name: 'Qualcomm',
-                mc: 'High',
-                rs: 'High-Medium',
-                desc: 'Snapdragon 8/7/6/4 families',
-                analysis: 'Direct competition across all price segments. Both parties design complex ARM-based SoCs. While Qualcomm leads in flagship performance and Modem technology, MediaTek is highly aggressive in power efficiency and cost.',
-                color: 'bg-red-500'
-                },
-                {
-                id: 'samsung',
-                name: 'Samsung LSI',
-                mc: 'Medium',
-                rs: 'Medium',
-                desc: 'Exynos Series',
-                analysis: 'Moderate market overlap. Competition primarily exists in the mid-range Android phone market, but with different strategies. MediaTek relies on efficient outsourcing, whereas Samsung pursues vertical integration mainly targeted at its own Galaxy devices.',
-                color: 'bg-blue-500'
-                },
-                {
-                id: 'unisoc',
-                name: 'UNISOC',
-                mc: 'Medium',
-                rs: 'Medium-Low',
-                desc: 'T-series / Entry 5G',
-                analysis: 'Overlap in the budget market. UNISOC focuses on cost-optimized entry-level and 4G markets. MediaTek far surpasses them in terms of global OEM partnerships and brand recognition.',
-                color: 'bg-purple-500'
-                },
-                {
-                id: 'apple',
-                name: 'Apple',
-                mc: 'Low',
-                rs: 'Low',
-                desc: 'A-Series',
-                analysis: 'Extremely low direct competition. Apple chips are used exclusively for iPhones (iOS ecosystem), featuring highly closed hardware and software integration, which differs fundamentally from MediaTek’s broad Android strategy.',
-                color: 'bg-gray-500'
-                }
-            ],
-            termTitle: 'Market Key Concepts',
-            terms: [
-                { term: 'Tangible Resources', def: 'Tangible resources refer to physical or financial assets that can be seen, measured, and recorded on a firm’s balance sheet, typically with clear market value. Common Types: Financial resources (cash, stocks, bonds), Physical assets (factories, machinery), Technological assets (IT infrastructure).' },
-                { term: 'Intangible Resources', def: 'Intangible resources are non-physical assets that are difficult to measure directly but enable firms to create value and sustain competitive advantage. Common Types: Brand image and goodwill, Patents, trademarks, and copyrights, Organizational culture and managerial capabilities.' },
-                { term: 'Market Commonality', def: 'Market commonality refers to the extent to which two or more firms overlap in the same product markets or geographic markets.' },
-                { term: 'Resource Similarity', def: 'Resource similarity refers to the degree to which competing firms possess similar resource structures, capabilities, and strategic assets.' }
-            ],
-            valueNetTitle: 'Value Net - Click nodes for details',
-            clickDetails: 'Click for details',
-            vnData: [
-                {
-                id: 'SUPPLIER',
-                category: 'SUPPLIER',
-                icon: 'Box', // Changed from JSX to string
-                color: 'border-blue-500 bg-blue-500/10',
-                partners: [
-                    { name: 'IP Providers', details: 'Arm Holdings: Provides CPU/GPU architecture licenses, forming the core components of mobile chipsets.' },
-                    { name: 'EDA 工具 (EDA Tools)', details: 'Cadence & Synopsys: Provide chip design software and IP licenses, boosting 2nm design productivity (by around 30%) and accelerating verification speed.' },
-                    { name: 'Foundry', details: 'TSMC: The sole advanced-process partner (3nm/2nm), responsible for flagship chip manufacturing.' }
-                ],
-                valueProvided: 'Reciprocal value: MediaTek expands Arm\'s market penetration via 2B+ device shipments; feedback data helps Cadence optimize tools.'
-                },
-                {
-                id: 'CUSTOMER',
-                category: 'CUSTOMER',
-                icon: 'Users', // Changed from JSX to string
-                color: 'border-green-500 bg-green-500/10',
-                partners: [
-                    { name: 'Smartphone OEMs', details: 'OPPO, Vivo, Xiaomi, Realme, Huawei (5G Market Share ~30%).' }
-                ],
-                valueProvided: 'Value Provision: Price advantage (high performance/cost), efficiency (Dimensity 9500 reduces power by 37%), helping customers capture mid-range and emerging markets (LATAM, MEA).'
-                },
-                {
-                id: 'COMPETITOR',
-                category: 'COMPETITOR',
-                icon: 'ShieldCheck', // Changed from JSX to string
-                color: 'border-red-500 bg-red-500/10',
-                partners: [
-                    { name: 'Qualcomm', details: 'Largest competitor. Snapdragon leads in flagship/AI, but faces MediaTek\'s pricing pressure in mid-range.' },
-                    { name: 'UNISOC', details: 'Key rival in China\'s mid-low 5G market (T8300), fierce price competition, entered Xiaomi Redmi supply chain.' }
-                ],
-                valueProvided: 'Dynamic Competition: Qualcomm pushes MediaTek towards high-end/AI; UNISOC forces defense of mid-low market share.'
-                },
-                {
-                id: 'COMPLEMENTOR',
-                category: 'COMPLEMENTOR',
-                icon: 'Factory', // Changed from JSX to string
-                color: 'border-purple-500 bg-purple-500/10',
-                partners: [
-                    { name: 'TSMC', details: 'Core partner. Provides 3nm N3P process & CoWoS packaging, translating designs into high-performance chips.' },
-                    { name: 'ASE', details: 'Packaging accelerator. Provides FC-BGA & advanced packaging, speeding up time-to-market.' },
-                    { name: 'KYEC', details: 'Quality gatekeeper. Handles high-complexity testing ensuring yield and stability.' }
-                ],
-                valueProvided: 'Complementary Value: MediaTek\'s 1B annual shipments provide stable revenue/capacity utilization; joint tech validation (e.g., CoWoS) lowers R&D risk.'
-                }
-            ],
-            ai: {
-                title: '✨ AI Strategy Consultant',
-                desc: 'Let Gemini generate a strategic analysis summary based on the current market matrix and value net!',
-                btn: 'Generate Strategic Insight',
-                resultTitle: 'Gemini Strategy Insight:'
-            }
-            },
-            qa: {
-            title: 'FAQ & Interactive Q&A',
-            subtitle: 'Common Questions & Quiz Challenge',
-            faqTitle: 'Frequently Asked Questions (FAQ)',
-            faqs: [
-                {
-                q: 'Why did MediaTek choose to outsource manufacturing, packaging, and testing?',
-                a: 'MediaTek chose to outsource wafer manufacturing, packaging and testing to focus on its core competitiveness - IC design. While avoiding high capital investment and risks, leveraging the technology and scale effects of professional foundries, and maintaining production flexibility. Such an outsourcing strategy has helped MediaTek maintain its advantages in capital, risk management, technological innovation and market response speed.'
-                },
-                {
-                q: 'Besides mobile phone chips, what other business units does MediaTek have?',
-                a: 'In addition to mobile phone chips, MediaTek also produces chips for home entertainment (smart TVs, set-top boxes), wireless communications, the Internet of Things (IoT), automotive electronics, and the AI ​​server/data center ASIC chips that have been the mainstream development in recent years.'
-                },
-                {
-                q: 'What are the English proficiency requirements for the PMM position?',
-                a: 'PMM requires developing global market strategies, collaborating and communicating with international teams (such as those in the US, India, and Japan), coordinating multinational projects, and writing reports and presentations in English. Therefore, we expect job seekers to have excellent oral communication and professional writing skills, and be able to handle international meetings and documents fluently.'
-                },
-                {
-                q: 'What is a mobile phone chip?',
-                a: 'The mobile phone chip is the brain and heart of the mobile phone, integrating multiple cores such as CPU, GPU, NPU (AI processor), ISP (image processing unit), and 5G modem, which are responsible for computing, graphics rendering, AI tasks, photography, and networking, ensuring that the mobile phone runs smoothly and can quickly support various functions.'
-                },
-                {
-                q: 'Why is MediaTek\'s pricing lower than Qualcomm\'s?',
-                a: 'MediaTek\'s mobile chips (such as the Dimensity series) are priced about 50% lower than Qualcomm\'s Snapdragon chips, primarily due to its R&D strategy and economies of scale, which benefits mobile phone manufacturers. MediaTek relies on Arm standard CPU/GPU designs, eliminating the need for substantial investment in custom cores and significantly reducing R&D costs. Its strategy focuses on cost-effectiveness, avoiding Qualcomm\'s patent fees and brand premium, attracting mid-to-high-end smartphone manufacturers like Xiaomi and OPPO, expanding its market share, and amortizing fixed costs with annual chip shipments exceeding 1 billion units, thus strengthening pricing competitiveness. Profits come from high volume rather than high unit price, achieving economies of scale.'
-                }
-            ],
-            quizTitle: 'Knowledge Challenge',
-            aiQuizBtn: '✨ Generate New Quiz', 
-            aiTag: '✨ AI Generated', 
-            quizzes: [
-                {
-                category: 'Company',
-                question: 'If MediaTek\'s core focus could be summarized in one tech area, what would it be?',
-                options: [
-                    { text: 'A. Cloud Computing & Data Centers', isCorrect: false },
-                    { text: 'B. Smartphone Chip Technology', isCorrect: true },
-                    { text: 'C. Automotive Electronic Control Chips', isCorrect: false }
-                ],
-                explanation: 'Explanation: The entire company introduction describes scenarios starting from smartphones, discussing performance, efficiency, and mobile computing applications, without focusing the main axis on data centers or automotive systems.'
-                },
-                {
-                    category: 'Company',
-                    question: 'What does "standing at the forefront of innovation" mentioned in the introduction refer to?',
-                    options: [
-                    { text: 'A. Mobile Chips', isCorrect: true },
-                    { text: 'B. Software Platforms', isCorrect: false },
-                    { text: 'C. Semiconductor Equipment Manufacturing', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: "Forefront of innovation" in the text appears alongside mobile devices and chip technology, semantically emphasizing the evolution of mobile chips themselves, rather than platforms or manufacturing ends.'
-                },
-                {
-                category: 'Company',
-                question: 'From an overall positioning perspective, which company role does MediaTek best resemble?',
-                options: [
-                    { text: 'A. Providing OS and Application Services', isCorrect: false },
-                    { text: 'B. Providing Wireless Communication and Smart Device Chip Solutions', isCorrect: true },
-                    { text: 'C. Providing Cloud Infrastructure Services', isCorrect: false }
-                ],
-                explanation: 'Explanation: The company overview repeatedly mentions chips, communications, and integrated solutions, indicating MediaTek\'s position is at the hardware and system level, not software or cloud services.'
-                },
-                {
-                    category: 'Company',
-                    question: 'Which description best fits MediaTek\'s approach to SoC design?',
-                    options: [
-                    { text: 'A. Focusing on single-function modular design', isCorrect: false },
-                    { text: 'B. Emphasizing high integration to meet diverse market needs', isCorrect: true },
-                    { text: 'C. Primarily low-volume, high-customization products', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: The introduction explicitly points out "highly integrated" and "diverse markets," indicating the goal of SoC design is universality and scale, rather than single-use or low-volume customization.'
-                },
-                {
-                    category: 'Company',
-                    question: 'In terms of industry interaction description, which perspective does MediaTek adopt?',
-                    options: [
-                    { text: 'A. Viewing other vendors purely as competitors', isCorrect: false },
-                    { text: 'B. Only emphasizing cooperative relationships with partners', isCorrect: false },
-                    { text: 'C. Both competitive and cooperative relationships exist simultaneously', isCorrect: true }
-                    ],
-                    explanation: 'Explanation: The company introduction specifically uses the concept of "co-opetitive," explaining that MediaTek operates in the industry not just by competing or cooperating, but with both coexisting.'
-                },
-                {
-                category: 'Job Details',
-                question: 'Based on the job content, what category of products is this role primarily responsible for?',
-                options: [
-                    { text: 'A. IoT and Smart Home Chips', isCorrect: false },
-                    { text: 'B. 5G Flagship Smartphone Chips', isCorrect: true },
-                    { text: 'C. Wireless Connectivity and Wi-Fi Modules', isCorrect: false }
-                ],
-                explanation: 'Explanation: The job description directly points to the Smartphone BU and 5G flagship product lines, showing this role focuses on high-end smartphone chips.'
-                },
-                {
-                    category: 'Job Details',
-                    question: 'Which stage of the product lifecycle does this role\'s involvement most closely match?',
-                    options: [
-                    { text: 'A. From manufacturing to shipping', isCorrect: false },
-                    { text: 'B. From spec definition to Go-to-Market (GTM)', isCorrect: true },
-                    { text: 'C. From marketing planning to brand communication', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: The job content clearly mentions spec definition and GTM, meaning this role spans product planning and market introduction, not manufacturing or pure marketing.'
-                },
-                {
-                    category: 'Job Details',
-                    question: 'In the market analysis section, which competitors are specifically named as needing attention?',
-                    options: [
-                    { text: 'A. Samsung, Sony', isCorrect: false },
-                    { text: 'B. Qualcomm, Apple', isCorrect: true },
-                    { text: 'C. Google, Microsoft', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: The job description explicitly lists Qualcomm and Apple, indicating these two are viewed as the most critical rivals in the Smartphone SoC market.'
-                },
-                {
-                category: 'Market Analysis',
-                question: 'In the classification of resource configuration, which item belongs to "tangible, directly allocable" resources?',
-                options: [
-                    { text: 'A. OEM Partnerships', isCorrect: false },
-                    { text: 'B. Brand Strength', isCorrect: false },
-                    { text: 'C. SoC Product Portfolio', isCorrect: true }
-                ],
-                explanation: 'Explanation: The SoC product itself is a concretely existing, manageable resource, thus classified as a tangible resource, rather than a relationship or intellectual property.'
-                },
-                {
-                    category: 'Market Analysis',
-                    question: 'Which market does the Helio series primarily correspond to in the overall product configuration?',
-                    options: [
-                    { text: 'A. 5G Flagship Market', isCorrect: false },
-                    { text: 'B. 5G Entry-to-Flagship', isCorrect: false },
-                    { text: 'C. 4G Market', isCorrect: true }
-                    ],
-                    explanation: 'Explanation: The analysis clearly links the Helio series with the 4G market, distinguishing it from other product lines focused on 5G.'
-                },
-                {
-                    category: 'Market Analysis',
-                    question: 'Which of the following fits the characteristic of "Intangible Resources"?',
-                    options: [
-                    { text: 'A. Fabless Model', isCorrect: false },
-                    { text: 'B. Brand Advantage (Cost-to-Performance)', isCorrect: true },
-                    { text: 'C. Multi-core CPU, GPU, NPU Integration Capability', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: Brand image and cost-performance ratio belong to advantages at the market perception level, cannot be directly quantified, and are thus classified as intangible resources.'
-                },
-                {
-                    category: 'Market Analysis',
-                    question: 'What is the role of OPPO, Vivo, and Xiaomi in the Value Net?',
-                    options: [
-                    { text: 'A. Competitors', isCorrect: false },
-                    { text: 'B. Customers', isCorrect: true },
-                    { text: 'C. Suppliers', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: These brands are placed in the position of end adopters in the value net, representing their role as customers using MediaTek chips.'
-                },
-                {
-                    category: 'Market Analysis',
-                    question: 'How are TSMC, ARM, and Google positioned in the Value Net?',
-                    options: [
-                    { text: 'A. Competitors', isCorrect: false },
-                    { text: 'B. Suppliers', isCorrect: false },
-                    { text: 'C. Complementors', isCorrect: true }
-                    ],
-                    explanation: 'Explanation: The processes, IPs, or platforms provided by these companies can enhance the overall value of MediaTek products, so they are viewed as complementors.'
-                },
-                {
-                    category: 'Market Analysis',
-                    question: 'What is the main role of IP Providers and EDA Tools in the Value Net?',
-                    options: [
-                    { text: 'A. Customers', isCorrect: false },
-                    { text: 'B. Suppliers', isCorrect: true },
-                    { text: 'C. Complementors', isCorrect: false }
-                    ],
-                    explanation: 'Explanation: IP and EDA tools are indispensable input items for chip design, thus classified as suppliers in the value net.'
-                }
-            ]
-            }
+        // ... (Full English company data)
+      title: 'Company Introduction — MediaTek',
+      heroHeadline: 'Leading the world with advanced smartphone chip technologies.',
+      heroSub: 'MediaTek stands at the forefront of mobile chip innovation, continuously redefining performance and efficiency standards.',
+      overviewTitle: 'Company Overview',
+      overviewText: 'MediaTek is one of the world’s leading providers of wireless communication and smart device chip solutions, with a strong presence in the smartphone market. Through highly integrated SoC designs, the company supports diverse global brands and market needs.',
+      coreValues: [
+        { title: 'Innovation', desc: 'Continuously invest in advanced manufacturing processes, AI, and mobile communication technologies to drive the long-term evolution of chip performance, focusing on future application scenarios rather than a single product generation.' },
+        { title: 'Co-opetitive', desc: 'Balance standard-setting, supply chain coordination, and market expansion by integrating the dynamic relationship between competition and cooperation within the highly competitive semiconductor industry.' },
+        { title: 'Value-Net', desc: 'Value strategic positioning within a value net that includes foundries, end brands, and distribution channels; align supplier capabilities with customer demands to optimize cost and time-to-market.' }
+      ],
+      buTitle: 'Business Units & Strategic Focus',
+      buOverview: 'MediaTek operates a globally scaled and diversified chip portfolio spanning mobile communications, smart devices, and connectivity technologies, enabling strategic flexibility.',
+      buSmartphoneTitle: 'Smartphone BU (Business Unit)',
+      buSmartphoneDesc: 'Serving as the company\'s core competitive engine, it drives technical cadence and economies of scale. With the Dimensity series at its core, it provides comprehensive coverage of the smartphone market, ranging from flagship to mainstream segments.',
+      otherBusTitle: 'Other Business Units',
+      otherBus: [
+        { name: 'Smart Home & TV', desc: 'Chip solutions for smart TVs and home entertainment systems' },
+        { name: 'Internet of Things (IoT)', desc: 'Industrial and consumer applications, strengthening edge computing' },
+        { name: 'Connectivity', desc: 'Wi-Fi and Bluetooth technologies expanding cross-device value' }
+      ],
+      cta: 'Explore MediaTek’s smartphone chip technologies and discover how they shape the future of mobile devices.',
+      links: {
+        web: 'Official Website',
+        stock: 'Stock Info (2454.TW)'
+      }
+    },
+    job: {
+        // ... (Full English job data)
+      title: 'Job Description',
+      subtitle: 'Join the top team, define future communication',
+      position: 'Product Marketing Manager (PMM) – Smartphone',
+      location: 'Hsinchu, Taiwan | Full-time',
+      apply: 'Apply Now',
+      jobOverviewTitle: 'Job Overview',
+      jobOverview: 'The Smartphone Product Marketing Manager (PMM) is responsible for driving the success of MediaTek’s smartphone SoC product portfolio, including the Dimensity 5G and Helio 4G platforms. This role combines deep technical product understanding, Go-to-Market (GTM) execution, and cross-functional collaboration to empower global Android OEM partners and strengthen MediaTek’s market position.',
+      descTitle: 'Key Responsibilities',
+      descGroups: [
+        {
+          title: 'Product and Technical Ownership',
+          points: [
+            'Responsible for product planning, marketing promotion, and project design-in of smartphone SoCs.',
+            'Maintain a deep understanding of Dimensity and Helio platforms, focusing on advantages in AI, imaging, gaming, connectivity, and power efficiency.',
+            'Support OEM customers in understanding product differentiation and application scenarios across different market segments.'
+          ]
+        },
+        {
+          title: 'Go-to-Market (GTM) Strategy',
+          points: [
+            'Define and execute product launch strategies, including positioning, pricing, packaging, and channel strategies.',
+            'Manage end-to-end marketing campaigns and product launch execution across multiple regions.',
+            'Translate product features into clear customer and business value propositions.'
+          ]
+        },
+        {
+          title: 'Market Intelligence and Competitive Analysis',
+          points: [
+            'Conduct market analysis covering market size, customer segmentation, and buyer pain points.',
+            'Develop competitive analysis and positioning to support the development of product and business strategies.'
+          ]
+        },
+        {
+          title: 'Cross-functional Collaboration',
+          points: [
+            'Work closely with engineering, product development, sales, operations, finance, and legal teams.',
+            'Manage customer relationships and maintain effective communication and collaboration.',
+            'Provide sales and customer-facing teams with presentations, sales collateral, training, and FAQs.'
+          ]
+        },
+        {
+          title: 'Product Roadmap and Execution',
+          points: [
+            'Plan and manage the product roadmap and associated marketing and product management activities.',
+            'Coordinate with cross-functional teams to execute product plans and achieve business and financial goals.'
+          ]
         }
+      ],
+      compTitle: 'Learning, Development & Benefits',
+      salary: 'Reference range: ≥ TWD 40,000 per month',
+      benefitsList: [
+        {
+          title: 'Learning and Development',
+          items: ['Structured training systems and clear learning roadmaps.', 'Diverse learning resources (On-the-Job Training, external courses).', 'Knowledge sharing and research incentive mechanisms.']
+        },
+        {
+          title: 'Employee Benefits & Wellness',
+          items: ['Physical & Mental Well-being: Fitness facilities and stress-relief services.', 'Enriched Lifestyle: Arts and cultural activities, travel consulting.', 'Community & Relationships: Family support and social welfare initiatives.', 'Personalized Services: Ticket booking services and daily life assistance.']
+        }
+      ],
+      ksaTitle: 'Competency (KSA)',
+      ksa: {
+        knowledge: {
+            title: 'KNOWLEDGE',
+            tags: ['Electrical Engineering', 'Computer Science', 'Business'],
+            points: [
+                'Educational background in Electrical Engineering, Computer Science, Business, or related fields.',
+                'In-depth understanding of the smartphone and consumer electronics industries (including 5G/4G SoCs).',
+                'Familiarity with GTM (Go-to-Market) processes, market analysis, and competitive analysis.'
+            ]
+        },
+        skill: {
+            title: 'SKILLS',
+            tags: ['English Fluency', 'Customer Insight'],
+            points: [
+                'Ability to translate complex technologies into clear market messages and value propositions.',
+                'Strong capabilities in data interpretation, customer insight, and competitive dynamics analysis.',
+                'Fluent in English communication (listening, speaking, reading, and writing).'
+            ]
+        },
+        attitude: {
+            title: 'ATTITUDE',
+            tags: ['Cross-functional Collaboration', 'Fast-paced & Adaptable'],
+            points: [
+                'Self-motivated and result-oriented, with a strong sense of ownership over product and market outcomes.',
+                'Collaborative spirit with the ability to work effectively with cross-functional and global teams.',
+                'Highly adaptable and willing to learn in a fast-paced, technology-driven environment.'
+            ]
+        }
+      },
+      termTitle: 'Terminology Flashcards',
+      terms: [
+        { term: 'Project Design-in', def: 'Customer evaluates and integrates MediaTek’s chipset during development.' },
+        { term: 'Project Design-win', def: 'Customer officially selects the solution for mass production.' },
+        { term: 'Roadmap', def: 'Long-term planning of specs, performance, timelines, and positioning.' },
+        { term: 'NTN / NPU / zRAM / SLC', def: 'Key chipset technologies (Non-Terrestrial Network, Neural Processing Unit, etc.).' }
+      ],
+      ai: {
+          title: '✨ AI Career Coach',
+          desc: 'Click below to let Gemini generate a mock interview question and advice for this role!',
+          btn: 'Generate Interview Question',
+          resultTitle: 'Gemini Advice:'
+      }
+    },
+    market: {
+        // ... (Full English market data with corrections)
+      title: 'Market Analysis',
+      subtitle: 'A Multidimensional Analysis through the Lens of Market Commonality and Resource Similarity.',
+      resourceTitle: 'Resource Configuration',
+      tangibleTitle: 'Tangible Resources',
+      intangibleTitle: 'Intangible Resources',
+      tangiblePoints: [
+        'SoC Product Portfolio: Dimensity covers 5G segments from entry-level to flagship; Helio targets the 4G market.',
+        'R&D and Design Capabilities: Competitive design expertise in multi-core CPU, GPU, NPU, and integrated Modems.',
+        'Fabless Model: Close collaboration with foundries (such as TSMC).'
+      ],
+      intangiblePoints: [
+        'Brand Advantage: Strong brand equity in the cost-to-performance (value-driven) smartphone market.',
+        'AI & Multimedia IP: Proprietary IPs that enhance camera, gaming, and user experience.',
+        'OEM Partnerships: Extensive global partnerships with Android smartphone brands.',
+        'Ecosystem Adoption: Widespread adoption across global Android device models.'
+      ],
+      matrixTitle: 'Competitor Strategic Positioning Matrix',
+      matrixX: 'Resource Similarity',
+      matrixY: 'Market Commonality', 
+      competitorsList: [
+        {
+          id: 'qualcomm',
+          name: 'Qualcomm',
+          mc: 'High',
+          rs: 'High-Medium',
+          desc: 'Snapdragon 8/7/6/4 families',
+          analysis: 'Direct competition across all price segments. Both parties design complex ARM-based SoCs. While Qualcomm leads in flagship performance and Modem technology, MediaTek is highly aggressive in power efficiency and cost.',
+          color: 'bg-red-500'
+        },
+        {
+          id: 'samsung',
+          name: 'Samsung LSI',
+          mc: 'Medium',
+          rs: 'Medium',
+          desc: 'Exynos Series',
+          analysis: 'Moderate market overlap. Competition primarily exists in the mid-range Android phone market, but with different strategies. MediaTek relies on efficient outsourcing, whereas Samsung pursues vertical integration mainly targeted at its own Galaxy devices.',
+          color: 'bg-blue-500'
+        },
+        {
+          id: 'unisoc',
+          name: 'UNISOC',
+          mc: 'Medium',
+          rs: 'Medium-Low',
+          desc: 'T-series / Entry 5G',
+          analysis: 'Overlap in the budget market. UNISOC focuses on cost-optimized entry-level and 4G markets. MediaTek far surpasses them in terms of global OEM partnerships and brand recognition.',
+          color: 'bg-purple-500'
+        },
+        {
+          id: 'apple',
+          name: 'Apple',
+          mc: 'Low',
+          rs: 'Low',
+          desc: 'A-Series',
+          analysis: 'Extremely low direct competition. Apple chips are used exclusively for iPhones (iOS ecosystem), featuring highly closed hardware and software integration, which differs fundamentally from MediaTek’s broad Android strategy.',
+          color: 'bg-gray-500'
+        }
+      ],
+      termTitle: 'Market Key Concepts',
+      terms: [
+          { term: 'Tangible Resources', def: 'Tangible resources refer to physical or financial assets that can be seen, measured, and recorded on a firm’s balance sheet, typically with clear market value. Common Types: Financial resources (cash, stocks, bonds), Physical assets (factories, machinery), Technological assets (IT infrastructure).' },
+          { term: 'Intangible Resources', def: 'Intangible resources are non-physical assets that are difficult to measure directly but enable firms to create value and sustain competitive advantage. Common Types: Brand image and goodwill, Patents, trademarks, and copyrights, Organizational culture and managerial capabilities.' },
+          { term: 'Market Commonality', def: 'Market commonality refers to the extent to which two or more firms overlap in the same product markets or geographic markets.' },
+          { term: 'Resource Similarity', def: 'Resource similarity refers to the degree to which competing firms possess similar resource structures, capabilities, and strategic assets.' }
+      ],
+      valueNetTitle: 'Value Net - Click nodes for details',
+      clickDetails: 'Click for details',
+      vnData: [
+        {
+          id: 'SUPPLIER',
+          category: 'SUPPLIER',
+          icon: 'Box', // Changed from JSX to string
+          color: 'border-blue-500 bg-blue-500/10',
+          partners: [
+            { name: 'IP 供應商 (IP Providers)', details: 'Arm Holdings: Provides CPU/GPU architecture licenses, forming the core components of mobile chipsets.' },
+            { name: 'EDA 工具 (EDA Tools)', details: 'Cadence & Synopsys: Provide chip design software and IP licenses, boosting 2nm design productivity (by around 30%) and accelerating verification speed.' },
+            { name: '晶圓代工 (Foundry)', details: 'TSMC (台積電): 唯一先進製程夥伴 (3nm/2nm)，負責 flagship chip manufacturing.' }
+          ],
+          valueProvided: 'Reciprocal value: MediaTek expands Arm\'s market penetration via 2B+ device shipments; feedback data helps Cadence optimize tools.'
+        },
+        {
+          id: 'CUSTOMER',
+          category: 'CUSTOMER',
+          icon: 'Users', // Changed from JSX to string
+          color: 'border-green-500 bg-green-500/10',
+          partners: [
+            { name: '智慧手機品牌 (Smartphone OEMs)', details: 'OPPO, Vivo, Xiaomi, Realme, Huawei (5G Market Share ~30%).' }
+          ],
+          valueProvided: 'Value Provision: Price advantage (high performance/cost), efficiency (Dimensity 9500 reduces power by 37%), helping customers capture mid-range and emerging markets (LATAM, MEA).'
+        },
+        {
+          id: 'COMPETITOR',
+          category: 'COMPETITOR',
+          icon: 'ShieldCheck', // Changed from JSX to string
+          color: 'border-red-500 bg-red-500/10',
+          partners: [
+            { name: 'Qualcomm (高通)', details: 'Largest competitor. Snapdragon leads in flagship/AI, but faces MediaTek\'s pricing pressure in mid-range.' },
+            { name: 'UNISOC (紫光展銳)', details: 'Key rival in China\'s mid-low 5G market (T8300), fierce price competition, entered Xiaomi Redmi supply chain.' }
+          ],
+          valueProvided: 'Dynamic Competition: Qualcomm pushes MediaTek towards high-end/AI; UNISOC forces defense of mid-low market share.'
+        },
+        {
+          id: 'COMPLEMENTOR',
+          category: 'COMPLEMENTOR',
+          icon: 'Factory', // Changed from JSX to string
+          color: 'border-purple-500 bg-purple-500/10',
+          partners: [
+            { name: 'TSMC (台積電)', details: 'Core partner. Provides 3nm N3P process & CoWoS packaging, translating designs into high-performance chips.' },
+            { name: 'ASE (日月光)', details: 'Packaging accelerator. Provides FC-BGA & advanced packaging, speeding up time-to-market.' },
+            { name: 'KYEC (京元電)', details: 'Quality gatekeeper. Handles high-complexity testing ensuring yield and stability.' }
+          ],
+          valueProvided: 'Complementary Value: MediaTek\'s 1B annual shipments provide stable revenue/capacity utilization; joint tech validation (e.g., CoWoS) lowers R&D risk.'
+        }
+      ],
+      ai: {
+          title: '✨ AI Strategy Consultant',
+          desc: 'Let Gemini generate a strategic analysis summary based on the current market matrix and value net!',
+          btn: 'Generate Strategic Insight',
+          resultTitle: 'Gemini Strategy Insight:'
+      }
+    },
+    // ... (English QA)
+    qa: {
+      title: 'FAQ & Interactive Q&A',
+      subtitle: 'Common Questions & Quiz Challenge',
+      faqTitle: 'Frequently Asked Questions (FAQ)',
+      faqs: [
+        {
+          q: 'Why did MediaTek choose to outsource manufacturing, packaging, and testing?',
+          a: 'MediaTek chose to outsource wafer manufacturing, packaging and testing to focus on its core competitiveness - IC design. While avoiding high capital investment and risks, leveraging the technology and scale effects of professional foundries, and maintaining production flexibility. Such an outsourcing strategy has helped MediaTek maintain its advantages in capital, risk management, technological innovation and market response speed.'
+        },
+        {
+          q: 'Besides mobile phone chips, what other business units does MediaTek have?',
+          a: 'In addition to mobile phone chips, MediaTek also produces chips for home entertainment (smart TVs, set-top boxes), wireless communications, the Internet of Things (IoT), automotive electronics, and the AI ​​server/data center ASIC chips that have been the mainstream development in recent years.'
+        },
+        {
+          q: 'What are the English proficiency requirements for the PMM position?',
+          a: 'PMM requires developing global market strategies, collaborating and communicating with international teams (such as those in the US, India, and Japan), coordinating multinational projects, and writing reports and presentations in English. Therefore, we expect job seekers to have excellent oral communication and professional writing skills, and be able to handle international meetings and documents fluently.'
+        },
+        {
+          q: 'What is a mobile phone chip?',
+          a: 'The mobile phone chip is the brain and heart of the mobile phone, integrating multiple cores such as CPU, GPU, NPU (AI processor), ISP (image processing unit), and 5G modem, which are responsible for computing, graphics rendering, AI tasks, photography, and networking, ensuring that the mobile phone runs smoothly and can quickly support various functions.'
+        },
+        {
+          q: 'Why is MediaTek\'s pricing lower than Qualcomm\'s?',
+          a: 'MediaTek\'s mobile chips (such as the Dimensity series) are priced about 50% lower than Qualcomm\'s Snapdragon chips, primarily due to its R&D strategy and economies of scale, which benefits mobile phone manufacturers. MediaTek relies on Arm standard CPU/GPU designs, eliminating the need for substantial investment in custom cores and significantly reducing R&D costs. Its strategy focuses on cost-effectiveness, avoiding Qualcomm\'s patent fees and brand premium, attracting mid-to-high-end smartphone manufacturers like Xiaomi and OPPO, expanding its market share, and amortizing fixed costs with annual chip shipments exceeding 1 billion units, thus strengthening pricing competitiveness. Profits come from high volume rather than high unit price, achieving economies of scale.'
+        }
+      ],
+      quizTitle: 'Knowledge Challenge',
+      aiQuizBtn: '✨ Generate New Quiz', 
+      aiTag: '✨ AI Generated', 
+      quizzes: [
+        {
+          category: 'Company',
+          question: 'If MediaTek\'s core focus could be summarized in one tech area, what would it be?',
+          options: [
+            { text: 'A. Cloud Computing & Data Centers', isCorrect: false },
+            { text: 'B. Smartphone Chip Technology', isCorrect: true },
+            { text: 'C. Automotive Electronic Control Chips', isCorrect: false }
+          ],
+          explanation: 'Explanation: The entire company introduction describes scenarios starting from smartphones, discussing performance, efficiency, and mobile computing applications, without focusing the main axis on data centers or automotive systems.'
+        },
+        {
+            category: 'Company',
+            question: 'What does "standing at the forefront of innovation" mentioned in the introduction refer to?',
+            options: [
+              { text: 'A. Mobile Chips', isCorrect: true },
+              { text: 'B. Software Platforms', isCorrect: false },
+              { text: 'C. Semiconductor Equipment Manufacturing', isCorrect: false }
+            ],
+            explanation: 'Explanation: "Forefront of innovation" in the text appears alongside mobile devices and chip technology, semantically emphasizing the evolution of mobile chips themselves, rather than platforms or manufacturing ends.'
+        },
+        {
+          category: 'Company',
+          question: 'From an overall positioning perspective, which company role does MediaTek best resemble?',
+          options: [
+            { text: 'A. Providing OS and Application Services', isCorrect: false },
+            { text: 'B. Providing Wireless Communication and Smart Device Chip Solutions', isCorrect: true },
+            { text: 'C. Providing Cloud Infrastructure Services', isCorrect: false }
+          ],
+          explanation: 'Explanation: The company overview repeatedly mentions chips, communications, and integrated solutions, indicating MediaTek\'s position is at the hardware and system level, not software or cloud services.'
+        },
+        {
+            category: 'Company',
+            question: 'Which description best fits MediaTek\'s approach to SoC design?',
+            options: [
+              { text: 'A. Focusing on single-function modular design', isCorrect: false },
+              { text: 'B. Emphasizing high integration to meet diverse market needs', isCorrect: true },
+              { text: 'C. Primarily low-volume, high-customization products', isCorrect: false }
+            ],
+            explanation: 'Explanation: The introduction explicitly points out "highly integrated" and "diverse markets," indicating the goal of SoC design is universality and scale, rather than single-use or low-volume customization.'
+        },
+        {
+            category: 'Company',
+            question: 'In terms of industry interaction description, which perspective does MediaTek adopt?',
+            options: [
+              { text: 'A. Viewing other vendors purely as competitors', isCorrect: false },
+              { text: 'B. Only emphasizing cooperative relationships with partners', isCorrect: false },
+              { text: 'C. Both competitive and cooperative relationships exist simultaneously', isCorrect: true }
+            ],
+            explanation: 'Explanation: The company introduction specifically uses the concept of "co-opetitive," explaining that MediaTek operates in the industry not just by competing or cooperating, but with both coexisting.'
+        },
+        {
+          category: 'Job Details',
+          question: 'Based on the job content, what category of products is this role primarily responsible for?',
+          options: [
+            { text: 'A. IoT and Smart Home Chips', isCorrect: false },
+            { text: 'B. 5G Flagship Smartphone Chips', isCorrect: true },
+            { text: 'C. Wireless Connectivity and Wi-Fi Modules', isCorrect: false }
+          ],
+          explanation: 'Explanation: The job description directly points to the Smartphone BU and 5G flagship product lines, showing this role focuses on high-end smartphone chips.'
+        },
+        {
+            category: 'Job Details',
+            question: 'Which stage of the product lifecycle does this role\'s involvement most closely match?',
+            options: [
+              { text: 'A. From manufacturing to shipping', isCorrect: false },
+              { text: 'B. From spec definition to Go-to-Market (GTM)', isCorrect: true },
+              { text: 'C. From marketing planning to brand communication', isCorrect: false }
+            ],
+            explanation: 'Explanation: The job content clearly mentions spec definition and GTM, meaning this role spans product planning and market introduction, not manufacturing or pure marketing.'
+        },
+        {
+            category: 'Job Details',
+            question: 'In the market analysis section, which competitors are specifically named as needing attention?',
+            options: [
+              { text: 'A. Samsung, Sony', isCorrect: false },
+              { text: 'B. Qualcomm, Apple', isCorrect: true },
+              { text: 'C. Google, Microsoft', isCorrect: false }
+            ],
+            explanation: 'Explanation: The job description explicitly lists Qualcomm and Apple, indicating these two are viewed as the most critical rivals in the Smartphone SoC market.'
+        },
+        {
+          category: 'Market Analysis',
+          question: 'In the classification of resource configuration, which item belongs to "tangible, directly allocable" resources?',
+          options: [
+            { text: 'A. OEM Partnerships', isCorrect: false },
+            { text: 'B. Brand Strength', isCorrect: false },
+            { text: 'C. SoC Product Portfolio', isCorrect: true }
+          ],
+          explanation: 'Explanation: The SoC product itself is a concretely existing, manageable resource, thus classified as a tangible resource, rather than a relationship or intellectual property.'
+        },
+        {
+            category: 'Market Analysis',
+            question: 'Which market does the Helio series primarily correspond to in the overall product configuration?',
+            options: [
+              { text: 'A. 5G Flagship Market', isCorrect: false },
+              { text: 'B. 5G Entry-to-Flagship', isCorrect: false },
+              { text: 'C. 4G Market', isCorrect: true }
+            ],
+            explanation: 'Explanation: The analysis clearly links the Helio series with the 4G market, distinguishing it from other product lines focused on 5G.'
+        },
+        {
+            category: 'Market Analysis',
+            question: 'Which of the following fits the characteristic of "Intangible Resources"?',
+            options: [
+              { text: 'A. Fabless Model', isCorrect: false },
+              { text: 'B. Brand Advantage (Cost-to-Performance)', isCorrect: true },
+              { text: 'C. Multi-core CPU, GPU, NPU Integration Capability', isCorrect: false }
+            ],
+            explanation: 'Explanation: Brand image and cost-performance ratio belong to advantages at the market perception level, cannot be directly quantified, and are thus classified as intangible resources.'
+        },
+        {
+            category: 'Market Analysis',
+            question: 'What is the role of OPPO, Vivo, and Xiaomi in the Value Net?',
+            options: [
+              { text: 'A. Competitors', isCorrect: false },
+              { text: 'B. Customers', isCorrect: true },
+              { text: 'C. Suppliers', isCorrect: false }
+            ],
+            explanation: 'Explanation: These brands are placed in the position of end adopters in the value net, representing their role as customers using MediaTek chips.'
+        },
+        {
+            category: 'Market Analysis',
+            question: 'How are TSMC, ARM, and Google positioned in the Value Net?',
+            options: [
+              { text: 'A. Competitors', isCorrect: false },
+              { text: 'B. Suppliers', isCorrect: false },
+              { text: 'C. Complementors', isCorrect: true }
+            ],
+            explanation: 'Explanation: The processes, IPs, or platforms provided by these companies can enhance the overall value of MediaTek products, so they are viewed as complementors.'
+        },
+        {
+            category: 'Market Analysis',
+            question: 'What is the main role of IP Providers and EDA Tools in the Value Net?',
+            options: [
+              { text: 'A. Customers', isCorrect: false },
+              { text: 'B. Suppliers', isCorrect: true },
+              { text: 'C. Complementors', isCorrect: false }
+            ],
+            explanation: 'Explanation: IP and EDA tools are indispensable input items for chip design, thus classified as suppliers in the value net.'
+        }
+      ]
+    }
+  }
 };
 
 const getContent = (lang) => {
@@ -2226,4 +2181,5 @@ const App = () => {
   );
 };
 
-export default App;
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
