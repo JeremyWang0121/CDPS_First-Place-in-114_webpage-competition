@@ -519,7 +519,7 @@
                 {
                 id: 'SUPPLIER',
                 category: '供應商 (SUPPLIER)',
-                icon: 'Box', 
+                icon: 'Box', // Changed from JSX to string
                 color: 'border-blue-500 bg-blue-500/10',
                 partners: [
                     { name: 'IP 供應商 (IP Providers)', details: 'Arm Holdings: 提供 CPU/GPU 架構授權，為行動晶片核心組件。' },
@@ -531,7 +531,7 @@
                 {
                 id: 'CUSTOMER',
                 category: '客戶 (CUSTOMER)',
-                icon: 'Users', 
+                icon: 'Users', // Changed from JSX to string
                 color: 'border-green-500 bg-green-500/10',
                 partners: [
                     { name: '智慧手機品牌 (Smartphone OEMs)', details: 'OPPO, Vivo, Xiaomi, Realme, Huawei (5G 市佔率達 30%)。' }
@@ -541,7 +541,7 @@
                 {
                 id: 'COMPETITOR',
                 category: '競爭者 (COMPETITOR)',
-                icon: 'ShieldCheck', 
+                icon: 'ShieldCheck', // Changed from JSX to string
                 color: 'border-red-500 bg-red-500/10',
                 partners: [
                     { name: 'Qualcomm (高通)', details: '最大競爭對手。Snapdragon 在旗艦與 AI 領域強勢，但在中階市場面臨 MediaTek 價格壓力。' },
@@ -552,10 +552,10 @@
                 {
                 id: 'COMPLEMENTOR',
                 category: '互補者 (COMPLEMENTOR)',
-                icon: 'Factory', 
+                icon: 'Factory', // Changed from JSX to string
                 color: 'border-purple-500 bg-purple-500/10',
                 partners: [
-                    { name: 'TSMC (台積電)', details: '核心夥伴。提供 3nm N3P 製程與 CoWoS 封裝。使設計轉化為實體高效能晶片。' },
+                    { name: 'TSMC (台積電)', details: 'Core partner. Provides 3nm N3P 製程與 CoWoS 封裝。使設計轉化為實體高效能晶片。' },
                     { name: 'ASE (日月光)', details: '封裝加速器。提供 FC-BGA 與先進封裝，加速產品上市。' },
                     { name: 'KYEC (京元電)', details: '品質守門員。負責高複雜度晶片測試，確保良率與穩定性。' }
                 ],
@@ -592,7 +592,7 @@
                 },
                 {
                 q: '為什麼聯發科的定價比高通的低？',
-                a: '聯發科的行動晶片（例如天璣系列）價格比高通驍龍晶片低約 50%，這主要是因為其研發策略和規模經濟。聯發科採用 Arm 標準 CPU/GPU 設計，無需對客製化核心進行大量投資，從而顯著降低了研發成本。其策略重點在於成本效益，避免了高通的專利費和品牌溢價，吸引了小米和 OPPO 等中高端智慧型手機製造商，擴大了市場份額，並透過年出貨量超過 10 億顆的晶片攤銷固定成本，從而增強了價格競爭力。其利潤主要來自銷售而非單價，實現了規模經濟。'
+                a: '聯發科的行動晶片（例如天璣系列）價格比高通驍龍晶片低約 50%，這主要是因為其研發策略和規模經濟，這有利於手機製造商。聯發科採用 Arm 標準 CPU/GPU 設計，無需對客製化核心進行大量投資，從而顯著降低了研發成本。其策略重點在於成本效益，避免了高通的專利費和品牌溢價，吸引了小米和 OPPO 等中高端智慧型手機製造商，擴大了市場份額，並透過年出貨量超過 10 億顆的晶片攤銷固定成本，從而增強了價格競爭力。其利潤主要來自銷售而非單價，實現了規模經濟。'
                 }
             ],
             quizTitle: '知識挑戰 (Quiz Challenge)',
@@ -630,7 +630,7 @@
                 explanation: 'Explanation: The company overview repeatedly mentions chips, communications, and integrated solutions, indicating MediaTek\'s position is at the hardware and system level, not software or cloud services.'
                 },
                 {
-                    category: '公司介紹',
+                    category: 'Company',
                     question: 'Which description best fits MediaTek\'s approach to SoC design?',
                     options: [
                     { text: 'A. Focusing on single-function modular design', isCorrect: false },
@@ -640,7 +640,7 @@
                     explanation: 'Explanation: The introduction explicitly points out "highly integrated" and "diverse markets," indicating the goal of SoC design is universality and scale, rather than single-use or low-volume customization.'
                 },
                 {
-                    category: '公司介紹',
+                    category: 'Company',
                     question: 'In terms of industry interaction description, which perspective does MediaTek adopt?',
                     options: [
                     { text: 'A. Viewing other vendors purely as competitors', isCorrect: false },
@@ -1062,7 +1062,7 @@
                 color: 'border-blue-500 bg-blue-500/10',
                 partners: [
                     { name: 'IP Providers', details: 'Arm Holdings: Provides CPU/GPU architecture licenses, forming the core components of mobile chipsets.' },
-                    { name: 'EDA Tools', details: 'Cadence & Synopsys: Provide chip design software and IP licenses, boosting 2nm design productivity (by around 30%) and accelerating verification speed.' },
+                    { name: 'EDA 工具 (EDA Tools)', details: 'Cadence & Synopsys: Provide chip design software and IP licenses, boosting 2nm design productivity (by around 30%) and accelerating verification speed.' },
                     { name: 'Foundry', details: 'TSMC: The sole advanced-process partner (3nm/2nm), responsible for flagship chip manufacturing.' }
                 ],
                 valueProvided: 'Reciprocal value: MediaTek expands Arm\'s market penetration via 2B+ device shipments; feedback data helps Cadence optimize tools.'
